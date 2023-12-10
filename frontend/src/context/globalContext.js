@@ -11,6 +11,7 @@ export const GlobalProvider = ({children}) => {
 
     const [incomes, setIncomes] = useState([])
     const [expenses, setExpenses] = useState([])
+    const [users,setUsers] = useState([])
     const [error, setError] = useState(null)
 
     //calculate incomes
@@ -21,11 +22,24 @@ export const GlobalProvider = ({children}) => {
             })
         getIncomes()
     }
+    const addUser = async (user) => {
+        const response = await axios.post(`${BASE_URL}add-user`, user)
+            .catch((err) =>{
+                setError(err.response.data.message)
+            })
+        getUsers()
+    }
 
     const getIncomes = async () => {
         const response = await axios.get(`${BASE_URL}get-incomes`)
         setIncomes(response.data)
         console.log(response.data)
+    }
+    const getUsers = async () => {
+        const response = await axios.get(`${BASE_URL}get-users`)
+        setUsers(response.data)
+        console.log(response.data)
+
     }
 
     const deleteIncome = async (id) => {
@@ -90,7 +104,10 @@ export const GlobalProvider = ({children}) => {
     return (
         <GlobalContext.Provider value={{
             addIncome,
+            addUser,
             getIncomes,
+            getUsers,
+            users,
             incomes,
             deleteIncome,
             expenses,

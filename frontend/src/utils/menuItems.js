@@ -3,26 +3,31 @@ import {dashboard, expenses, logout, transactions, trend} from '../utils/Icons'
 export const menuItems = [
   
     {
-        id: 2,
-        title: "View Transactions",
+        id: 1,
+        title: "View Overview",
         icon: transactions,
         link: "/dashboard",
     },
     {
-        id: 3,
+        id: 2,
         title: "Incomes",
         icon: trend,
         link: "/dashboard",
     },
     {
-        id: 4,
+        id: 3,
         title: "Expenses",
         icon: expenses,
         link: "/dashboard",
     },
     {
-        id: 6,
-        title: "sign out",
+        id: 4,
+        title: "Register",
+        icon: logout,
+    },
+    {
+        id: 5,
+        title: "Login",
         icon: logout,
     }
 ]

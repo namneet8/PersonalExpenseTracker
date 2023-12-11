@@ -9,10 +9,7 @@ function Register() {
     return (
         <RegisterStyled>
             <InnerLayout>
-                
-                    <div className="form-container">
-                        <Form />
-                    </div>
+     
                     
             
             </InnerLayout>

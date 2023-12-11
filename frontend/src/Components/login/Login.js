@@ -7,17 +7,7 @@ import Form from './LoginForm';
 function Login() {
     
     return (
-        <LoginStyled>
-            <InnerLayout>
-                
-                    <div className="form-container">
-                        <Form />
-                    </div>
-                    
-            
-            </InnerLayout>
-        </LoginStyled>
-    )
+
 }
 
 const LoginStyled = styled.div`

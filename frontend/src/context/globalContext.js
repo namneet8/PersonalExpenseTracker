@@ -17,18 +17,7 @@ export const GlobalProvider = ({children}) => {
     //calculate incomes
     const addIncome = async (income) => {
         const response = await axios.post(`${BASE_URL}add-income`, income)
-            .catch((err) =>{
-                setError(err.response.data.message)
-            })
-        getIncomes()
-    }
-    const addUser = async (user) => {
-        const response = await axios.post(`${BASE_URL}add-user`, user)
-            .catch((err) =>{
-                setError(err.response.data.message)
-            })
-        getUsers()
-    }
+
 
     const getIncomes = async () => {
         const response = await axios.get(`${BASE_URL}get-incomes`)

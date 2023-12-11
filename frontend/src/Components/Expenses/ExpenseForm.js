@@ -57,28 +57,7 @@ function ExpenseForm() {
                 />
             </div>
             <div className="input-control">
-                <DatePicker 
-                    id='date'
-                    placeholderText='Enter A Date'
-                    selected={date}
-                    dateFormat="dd/MM/yyyy"
-                    onChange={(date) => {
-                        setInputState({...inputState, date: date})
-                    }}
-                />
-            </div>
-            <div className="selects input-control">
-                <select required value={category} name="category" id="category" onChange={handleInput('category')}>
-                    <option value="" disabled >Select Option</option>
-                    <option value="education">Education</option>
-                    <option value="groceries">Groceries</option>
-                    <option value="health">Health</option>
-                    <option value="subscriptions">Subscriptions</option>
-                    <option value="takeaways">Takeaways</option>
-                    <option value="clothing">Clothing</option>  
-                    <option value="travelling">Travelling</option>  
-                    <option value="other">Other</option>  
-                </select>
+                <DatePick
             </div>
             <div className="input-control">
                 <textarea name="description" value={description} placeholder='Add A Reference' id="description" cols="30" rows="4" onChange={handleInput('description')}></textarea>

@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
-import { useGlobalContext } from '../../context/globalContext';
+import { useGlobalContext } from '../context/globalContext';
 import Button from '../Button/Button';
-import { plus } from '../../utils/Icons';
+import { plus } from '../../utils/icons';
 
 
 function Form() {
@@ -137,7 +137,7 @@ const FormStyled = styled.form`
 
     .submit-btn{
         button{
-            box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
+            box-shadow: 0px 1px 15px black;
             &:hover{
                 background: var(--color-green) !important;
             }

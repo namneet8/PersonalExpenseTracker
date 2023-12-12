@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { useGlobalContext } from '../../context/globalContext';
-import { InnerLayout } from '../../styles/Layouts';
+import { useGlobalContext } from '../context/globalContext';
+
 import Form from '../Form/Form';
 import IncomeItem from '../IncomeItem/IncomeItem';
 
@@ -13,8 +13,10 @@ function Income() {
     }, [])
     return (
         <IncomeStyled>
-            <InnerLayout>
-                <h1>Incomes</h1>
+             <div className='form'>
+            <div className='container'>
+            
+                <h1>Income</h1>
                 <h2 className="total-income">Total Income: <span>${totalIncome()}</span></h2>
                 <div className="income-content">
                     <div className="form-container">
@@ -38,13 +40,25 @@ function Income() {
                         })}
                     </div>
                 </div>
-            </InnerLayout>
+                </div>
+                </div>
+           
         </IncomeStyled>
     )
 }
 
 const IncomeStyled = styled.div`
+  
+    .form{
+        padding:60px;
+        
+    }
+    .container{
+        background-color: salmon;
+        padding:20px;
+    }
     display: flex;
+    flex-direction:column;
     overflow: auto;
     .total-income{
         display: flex;
@@ -64,6 +78,7 @@ const IncomeStyled = styled.div`
             color: var(--color-green);
         }
     }
+    
     .income-content{
         display: flex;
         gap: 0.5rem;

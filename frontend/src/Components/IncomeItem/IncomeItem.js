@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { dateFormat } from '../../utils/dateFormat';
-import { bitcoin, book, calender, card, circle, clothing, comment, dollar, food, freelance, medical, money, piggy, stocks, takeaway, trash, tv, users, yt } from '../../utils/Icons';
+import { bitcoin, book, calender, card, circle, clothing, comment, dollar, food, freelance, medical, money, piggy, stocks, takeaway, trash, tv, users, yt } from '../../utils/icons';
 import Button from '../Button/Button';
 
 function IncomeItem({
@@ -85,10 +85,10 @@ function IncomeItem({
                             icon={trash}
                             bPad={'0.3rem'}
                             bRad={'50%'}
-                            bg={'var(--primary-color'}
-                            color={'#fff'}
-                            iColor={'#fff'}
-                            hColor={'var(--color-green)'}
+                            bg={'var(salmon)'}
+                            color={'##04193e'}
+                            iColor={'blue'}
+                            hColor={'var(blue)'}
                             onClick={() => deleteItem(id)}
                         />
                     </div>
@@ -128,6 +128,7 @@ const IncomeItemStyled = styled.div`
         flex: 1;
         display: flex;
         flex-direction: column;
+        backgroung-color:salmon;
         gap: .1rem;
         h5{
             font-size: 1.3rem;
@@ -145,6 +146,7 @@ const IncomeItemStyled = styled.div`
                 background: ${props => props.indicator};
             }
         }
+        
 
         .inner-content{
             display: flex;

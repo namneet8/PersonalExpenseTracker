@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
-import { useGlobalContext } from '../../context/globalContext';
+import { useGlobalContext } from '../context/globalContext';
 import Button from '../Button/Button';
-import { plus } from '../../utils/Icons';
+import { plus } from '../../utils/icons';
 
 
 function ExpenseForm() {
@@ -57,7 +57,28 @@ function ExpenseForm() {
                 />
             </div>
             <div className="input-control">
-                <DatePick
+                <DatePicker 
+                    id='date'
+                    placeholderText='Enter A Date'
+                    selected={date}
+                    dateFormat="dd/MM/yyyy"
+                    onChange={(date) => {
+                        setInputState({...inputState, date: date})
+                    }}
+                />
+            </div>
+            <div className="selects input-control">
+                <select required value={category} name="category" id="category" onChange={handleInput('category')}>
+                    <option value="" disabled >Select Option</option>
+                    <option value="education">Education</option>
+                    <option value="groceries">Groceries</option>
+                    <option value="health">Health</option>
+                    <option value="subscriptions">Subscriptions</option>
+                    <option value="takeaways">Takeaways</option>
+                    <option value="clothing">Clothing</option>  
+                    <option value="travelling">Travelling</option>  
+                    <option value="other">Other</option>  
+                </select>
             </div>
             <div className="input-control">
                 <textarea name="description" value={description} placeholder='Add A Reference' id="description" cols="30" rows="4" onChange={handleInput('description')}></textarea>
@@ -114,13 +135,13 @@ const ExpenseFormStyled = styled.form`
         }
     }
 
-    .submit-btn{
-        button{
-            box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
-            &:hover{
-                background: var(--color-green) !important;
-            }
-        }
+    .submit-btn button {
+        box-shadow: 0px 1px 15px black;
+      }
+      
+      .submit-btn button:hover {
+        background-color: white;
+      }
     }
 `;
 export default ExpenseForm

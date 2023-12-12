@@ -1,11 +1,51 @@
-import React, { useEffect } from 'react'
-import styled from 'styled-components'
-import { useGlobalContext } from '../../context/globalContext';
-import History from '../../History/History';
-import { InnerLayout } from '../../styles/Layouts';
-import { dollar } from '../../utils/Icons';
+import React, { useContext, useEffect ,useState} from 'react'
+import { useNavigate } from 'react-router-dom';
+import { LoginContext } from '../context/Context';
+import { useGlobalContext } from '../context/globalContext';
+import History from '../history/History';
+import { dollar } from '../../utils/icons';
+import './dashboard.css';
 
-function Dashboard() {
+
+const Dashboard = () => {
+
+    const { logindata, setLoginData } = useContext(LoginContext);
+
+    const [data, setData] = useState(false);
+
+
+    const history = useNavigate();
+
+    const DashboardValid = async () => {
+        let token = localStorage.getItem("usersdatatoken");
+
+        const res = await fetch("/validuser", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": token
+            }
+        });
+
+        const data = await res.json();
+
+        if (data.status === 401 || !data) {
+            history("*");
+        } else {
+            console.log("user verify");
+            setLoginData(data)
+            history("/dash");
+        }
+    }
+
+
+    useEffect(() => {
+        setTimeout(() => {
+            DashboardValid();
+            setData(true)
+        }, 2000)
+
+    }, [])
     const {totalExpenses,incomes, expenses, totalIncome, totalBalance, getIncomes, getExpenses } = useGlobalContext()
 
     useEffect(() => {
@@ -14,9 +54,9 @@ function Dashboard() {
     }, [])
 
     return (
-        <DashboardStyled>
-            <InnerLayout>
-            <div className="user-con">
+        <>
+            
+                <div className="user-con">
                 <div className="text">
                     <h2>Hi !!! Welcome back </h2>
                     <p>Let's manage expenses together</p><br></br>
@@ -32,7 +72,7 @@ function Dashboard() {
                                 </p>
                             </div>
                             <div className="expense">
-                                <h2>Total Expense</h2>
+                                <h2>Total Expenses</h2>
                                 <p>
                                     {dollar} {totalExpenses()}
                                 </p>
@@ -41,86 +81,44 @@ function Dashboard() {
                                 <h2>Total Balance</h2>
                                 <p>
                                     {dollar} {totalBalance()}
- 
-                </div>
-            </InnerLayout>
-        </DashboardStyled>
+                                </p>
+                            </div>
+                        </div>
+                    
+                    <div className="history-con">
+                        <History />
+                    </div>
+                    <div className = "minMax">
+                    <div className = "salary-minMax">
+                        <h2 className="salary-title">Min <span>Salary</span>Max</h2>
+                        <div className="salary-item">
+                            <p>
+                                ${Math.min(...incomes.map(item => item.amount))}
+                            </p>
+                            <p>
+                                ${Math.max(...incomes.map(item => item.amount))}
+                            </p>
+                        </div>
+                        </div>
+                        <div className = "expense-minMax">
+                        <h2 className="salary-title">Min <span>Expense</span>Max</h2>
+                        <div className="salary-item">
+                            <p>
+                                ${Math.min(...expenses.map(item => item.amount))}
+                            </p>
+                            <p>
+                                ${Math.max(...expenses.map(item => item.amount))}
+                            </p>
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+               
+            
+
+        </>
+
     )
 }
-
-const DashboardStyled = styled.div`
-    .stats-con{
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 2rem;
-        .chart-con{
-            grid-column: 1 / 4;
-            height: 400px;
-            .amount-con{
-                display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                gap: 2rem;
-                margin-top: 2rem;
-                .income, .expense{
-                    grid-column: span 2;
-                }
-                .income, .expense, .balance{
-                    background: #FCF6F9;
-                    border: 2px solid #FFFFFF;
-                    box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
-                    border-radius: 20px;
-                    padding: 1rem;
-                    p{
-                        font-size: 3.5rem;
-                        font-weight: 700;
-                    }
-                }
-
-                .balance{
-                    grid-column: 2 / 4;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    p{
-                        color: var(--color-green);
-                        opacity: 0.6;
-                        font-size: 4.5rem;
-                    }
-                }
-            }
-        }
-
-        .history-con{
-            grid-column: 4 / -1;
-            h2{
-                margin: 1rem 0;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-            }
-            .salary-title{
-                font-size: 1.2rem;
-                span{
-                    font-size: 1.8rem;
-                }
-            }
-            .salary-item{
-                background: #FCF6F9;
-                border: 2px solid #FFFFFF;
-                box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
-                padding: 1rem;
-                border-radius: 20px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                p{
-                    font-weight: 600;
-                    font-size: 1.6rem;
-                }
-            }
-        }
-    }
-`;
 
 export default Dashboard

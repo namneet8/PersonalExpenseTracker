@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { useGlobalContext } from '../../context/globalContext';
-import { InnerLayout } from '../../styles/Layouts';
-import Form from '../Form/Form';
+import { useGlobalContext } from '../context/globalContext';
+
 import IncomeItem from '../IncomeItem/IncomeItem';
 import ExpenseForm from './ExpenseForm';
 
@@ -14,7 +13,8 @@ function Expenses() {
     }, [])
     return (
         <ExpenseStyled>
-            <InnerLayout>
+           <div className='form'>
+            <div className='container'>
                 <h1>Expenses</h1>
                 <h2 className="total-income">Total Expense: <span>${totalExpenses()}</span></h2>
                 <div className="income-content">
@@ -24,13 +24,45 @@ function Expenses() {
                     <div className="incomes">
                         {expenses.map((income) => {
                             const {_id, title, amount, date, category, description, type} = income;
-
+                            console.log(income)
+                            return <IncomeItem
+                                key={_id}
+                                id={_id} 
+                                title={title} 
+                                description={description} 
+                                amount={amount} 
+                                date={date} 
+                                type={type}
+                                category={category} 
+                                indicatorColor="green"
+                                deleteItem={deleteExpense}
+                            />
+                        })}
+                    </div>
+                </div>
+                </div>
+                </div>
+            
+        </ExpenseStyled>
+    )
+}
 
 const ExpenseStyled = styled.div`
+.form{
+    padding:60px;
+    
+}
+.container{
+    background-color: salmon;
+    padding:20px;
+}
+
     display: flex;
+    flex-direction:column;
     overflow: auto;
     .total-income{
         display: flex;
+        
         justify-content: center;
         align-items: center;
         background: #FCF6F9;
@@ -49,9 +81,11 @@ const ExpenseStyled = styled.div`
     }
     .income-content{
         display: flex;
+        width:100%;
         gap: 0.5rem;
         .incomes{
             flex: 1;
+            
         }
     }
 `;

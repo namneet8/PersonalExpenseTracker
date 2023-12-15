@@ -47,7 +47,23 @@ const Header = () => {
         } else {
             console.log("error");
         }
+    }
 
+    const goDash = () => {
+        history("/dash")
+    }
+
+    const goError = () => {
+        history("*")
+    }
+    const goRegister = () => {
+        history("/register")
+    }
+    const goLogin = () => {
+        history("/login")
+    }
+
+    return (
         <>
             <header>
                 <nav>
@@ -57,12 +73,25 @@ const Header = () => {
                 {logindata.ValidUserOne ? (
                     <>
                     {/* Render links only when user is logged in */}
-                 
+                    <div className='navLoggedin'><NavLink to="/dash">Dashboard</NavLink>
+                        <NavLink to="/income">Incomes</NavLink>
+                        <NavLink to="/expenses">Expenses</NavLink>
+                        </div>
+                        <Avatar
+                            style={{ background: "salmon", fontWeight: "bold", textTransform: "capitalize" }}
+                            onClick={handleClick}
+                        >
+                            {logindata.ValidUserOne.fname[0].toUpperCase()}
+                        </Avatar>
+                        
+                    </>
+                ) : (
                     <>
-                        <Avatar style={{ background: "blue" }} onClick={handleClick} />
-                        {/* Render links for non-logged-in users */}
+                        <div className='navNotLoggedin'>
                         <NavLink to="/login">Login</NavLink>
                         <NavLink to="/register">Register</NavLink>
+                        </div>
+                        
                     </>
                 )}
             </div>

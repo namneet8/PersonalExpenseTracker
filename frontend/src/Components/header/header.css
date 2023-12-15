@@ -27,18 +27,28 @@ header img{
 header nav span.expense-tracker{
     text-decoration: none;
     font-size: 1.5em;
-    color: black;
+    color: salmon;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .navLoggedin {
     display: flex;
-    flex-direction: row; /* Stack links vertically */
+    flex-direction: row; 
 }
 
 .navLoggedin a {
-    margin-right: 10px; /* Adjust the margin as needed */
+    margin-right: 10px; 
     text-decoration: none;
-    color: #080707; /* Change the color as needed */
+    color: #080707; 
+    font-weight: bold;
+}
+.navNotLoggedin {
+    display: flex;
+    flex-direction: row;
+}
+.navNotLoggedin a {
+    margin-right: 10px; 
+    text-decoration: none;
+    color: white; 
     font-weight: bold;
 }
 .avtar{

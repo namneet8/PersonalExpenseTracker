@@ -47,6 +47,10 @@ export const GlobalProvider = ({children}) => {
         const res  = await axios.delete(`${BASE_URL}delete-income/${id}`)
         getIncomes()
     }
+    const editIncome = async (id) => {
+        const res  = await axios.edit(`${BASE_URL}edit-income/${id}`)
+        getIncomes()
+    }
 
     const totalIncome = () => {
         let totalIncome = 0;
@@ -114,6 +118,7 @@ export const GlobalProvider = ({children}) => {
             expenses,
             totalIncome,
             addExpense,
+            editIncome,
             getExpenses,
             deleteExpense,
             totalExpenses,

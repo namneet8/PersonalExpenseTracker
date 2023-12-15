@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { dateFormat } from '../../utils/dateFormat';
-import { bitcoin, book, calender, card, circle, clothing, comment, dollar, food, freelance, medical, money, piggy, stocks, takeaway, trash, tv, users, yt } from '../../utils/icons';
+import { bitcoin, book, calender, card, circle, clothing, comment, dollar, food, freelance, medical, money, piggy, stocks, takeaway, trash, tv, users, yt, edit } from '../../utils/icons';
 import Button from '../Button/Button';
 
 function IncomeItem({
@@ -13,8 +13,26 @@ function IncomeItem({
     description,
     deleteItem,
     indicatorColor,
-    type
+    type,
+    editItem
 }) {
+    // const [isEditing, setIsEditing] = useState(false);
+    // const [editedTitle, setEditedTitle] = useState(title);
+    // const [editedAmount, setEditedAmount] = useState(amount);
+    // const [editedDate, setEditedDate] = useState(date);
+    // const [editedDescription, setEditedDescription] = useState(description);
+    // const handleSave = () => {
+    //     // Trigger the function to save the changes
+    //     editItem(id, {
+    //         title: editedTitle,
+    //         amount: editedAmount,
+    //         date: editedDate,
+    //         description: editedDescription
+    //     });
+
+    //     // Exit edit mode
+    //     setIsEditing(false);
+    // };
 
     const categoryIcon = () =>{
         switch(category) {
@@ -81,6 +99,16 @@ function IncomeItem({
                         </p>
                     </div>
                     <div className="btn-con">
+                    <Button 
+                            icon={edit}
+                            bPad={'0.3rem'}
+                            bRad={'50%'}
+                            bg={'var(salmon)'}
+                            color={'##04193e'}
+                            iColor={'blue'}
+                            hColor={'var(blue)'}
+                            onClick={() => editItem(id)}
+                        />
                         <Button 
                             icon={trash}
                             bPad={'0.3rem'}

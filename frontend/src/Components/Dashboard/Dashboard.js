@@ -7,13 +7,58 @@ import { dollar } from '../../utils/icons';
 import './dashboard.css';
 
 
+const Dashboard = () => {
+
+    const { logindata, setLoginData } = useContext(LoginContext);
+
+    const [data, setData] = useState(false);
+
+
+    const history = useNavigate();
+
+    const DashboardValid = async () => {
+        let token = localStorage.getItem("usersdatatoken");
+
+        const res = await fetch("/validuser", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": token
+            }
+        });
+
+        const data = await res.json();
+
+        if (data.status === 401 || !data) {
+            history("*");
+        } else {
+            console.log("user verify");
+            setLoginData(data)
+            history("/dash");
+        }
+    }
+
+
+    useEffect(() => {
+        setTimeout(() => {
+            DashboardValid();
+            setData(true)
+        }, 2000)
+
+    }, [])
+    const {totalExpenses,incomes, expenses, totalIncome, totalBalance, getIncomes, getExpenses } = useGlobalContext()
+
+    useEffect(() => {
+        getIncomes()
+        getExpenses()
+    }, [])
 
     return (
         <>
             
                 <div className="user-con">
                 <div className="text">
-                    <h2>Hi !!! Welcome back </h2>
+                    <h2>Hi {logindata.ValidUserOne.fname}</h2>
                     <p>Let's manage expenses together</p><br></br>
                 </div>
             </div>

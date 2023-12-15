@@ -9,7 +9,8 @@ import { Routes, Route, useNavigate } from "react-router-dom"
 import { useEffect, useContext, useState } from "react";
 import { LoginContext } from "./components/context/Context";
 import Income from "./components/Income/Income";
-import Expenses from "./components/Expenses/Expenses"
+import Expenses from "./components/Expenses/Expenses";
+import Home from "./components/home/home";
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
 
     if (data.status === 401 || !data) {
       console.log("user not valid");
+      history("/")
     } else {
       console.log("user verify");
       setLoginData(data)
@@ -58,7 +60,8 @@ function App() {
             <Header />
 
             <Routes>
-              <Route path="/" element={<Login />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/dash" element={<Dashboard />} />
               <Route path="*" element={<Error />} />

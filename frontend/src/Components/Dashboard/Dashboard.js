@@ -58,7 +58,7 @@ const Dashboard = () => {
             
                 <div className="user-con">
                 <div className="text">
-                    <h2>Hi {logindata.ValidUserOne.fname}</h2>
+                    <h2>Hi </h2>
                     <p>Let's manage expenses together</p><br></br>
                 </div>
             </div>
@@ -88,30 +88,7 @@ const Dashboard = () => {
                     <div className="history-con">
                         <History />
                     </div>
-                    <div className = "minMax">
-                    <div className = "salary-minMax">
-                        <h2 className="salary-title">Min <span>Salary</span>Max</h2>
-                        <div className="salary-item">
-                            <p>
-                                ${Math.min(...incomes.map(item => item.amount))}
-                            </p>
-                            <p>
-                                ${Math.max(...incomes.map(item => item.amount))}
-                            </p>
-                        </div>
-                        </div>
-                        <div className = "expense-minMax">
-                        <h2 className="salary-title">Min <span>Expense</span>Max</h2>
-                        <div className="salary-item">
-                            <p>
-                                ${Math.min(...expenses.map(item => item.amount))}
-                            </p>
-                            <p>
-                                ${Math.max(...expenses.map(item => item.amount))}
-                            </p>
-                        </div>
-                        </div>
-                        </div>
+                    
                     </div>
                
             

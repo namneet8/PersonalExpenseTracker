@@ -37,7 +37,7 @@ const Login = () => {
                 position: "top-center"
             });
         } else if (!email.includes("@")) {
-            toast.warning("includes @ in your email!", {
+            toast.warning("write a valid email address", {
                 position: "top-center"
             });
         } else if (password === "") {

@@ -8,6 +8,7 @@ const Register = () => {
 
     const [passShow, setPassShow] = useState(false);
     const [cpassShow, setCPassShow] = useState(false);
+  
 
     const [inpval, setInpval] = useState({
         fname: "",
@@ -35,7 +36,7 @@ const Register = () => {
         const { fname, email, password, cpassword } = inpval;
 
         if (fname === "") {
-            toast.warning("fname is required!", {
+            toast.warning("Name is required!", {
                 position: "top-center"
             });
         } else if (email === "") {
@@ -43,7 +44,7 @@ const Register = () => {
                 position: "top-center"
             });
         } else if (!email.includes("@")) {
-            toast.warning("includes @ in your email!", {
+            toast.warning("Enter a valid email address", {
                 position: "top-center"
             });
         } else if (password === "") {
@@ -55,7 +56,7 @@ const Register = () => {
                 position: "top-center"
             });
         } else if (cpassword === "") {
-            toast.error("cpassword is required!", {
+            toast.error("confirm password is required!", {
                 position: "top-center"
             });
         }
@@ -64,7 +65,7 @@ const Register = () => {
                 position: "top-center"
             });
         } else if (password !== cpassword) {
-            toast.error("pass and Cpass are not matching!", {
+            toast.error("password and Confirm password are not matching!", {
                 position: "top-center"
             });
         } else {
@@ -83,12 +84,21 @@ const Register = () => {
 
             const res = await data.json();
             // console.log(res.status);
+            if (res.error) {
+                if (res.error === "This Email is Already Exist") {
+                    toast.error("User already exists!! Prefer login", {
+                        position: "top-center"
+                    })
+                }
+                
+            }
 
             if (res.status === 201) {
                 toast.success("Registration Successfully done 😃!", {
                     position: "top-center"
                 });
                 setInpval({ ...inpval, fname: "", email: "", password: "", cpassword: "" });
+                
             }
         }
     }
